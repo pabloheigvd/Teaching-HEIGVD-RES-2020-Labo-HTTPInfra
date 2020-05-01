@@ -4,10 +4,14 @@
 Author : Sacha Perdrizat, Pablo Mercado
 ```
 
-1. ## Part 1
+## Step 1: Static HTTP server with apache httpd
 
-2. ## Part 2
+## Step 2: Dynamic HTTP server with express.js
 
-3. ## Part 3
+## Step 3: Reverse proxy with apache (static configuration)
 
-4. ## Part 4
+## Step 4: AJAX requests with JQuery
+
+## Step 5: Dynamic reverse proxy configuration
+
+## Additional steps
