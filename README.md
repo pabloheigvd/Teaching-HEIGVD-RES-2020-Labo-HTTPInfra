@@ -5,46 +5,39 @@ Author : Sacha Perdrizat, Pablo Mercado
 ```
 
 ## Step 1: Static HTTP server with apache httpd
-exécuter le script
-```
+Soit on a réalisé une démo qui nécessite d'exécuter un seul fichier script. Pour voir la démo, il faut se placer dans le répertoire après clonage et exécuter le script dans le terminal:
+
+```bash
 ./step1.sh
 ```
 
-### exploration de l'image
-obtenir le nom du container avec (disons NOM_C):
-```
-docker ps
-```
-On récupère l'adresse IP du contenair au champ IPAddress (ici 172.17.0.2)
-```
-docker inspect NOM_C
-```
-On vérifie que le serveur est correctement setup avec:
+Il met en place l'image Docker avec ce Dockerfile de configuration:
 
-```
-docker logs NOM_C
+```dockerfile
+FROM php:7.2-apache
+
+COPY content/ /var/www/html/
 ```
 
-S'il n'y a qu'une erreur "Could not reliably determine the server's fully qualified domain name...", c'est que c'est ok.
+ou l'on va télécharger l'image officielle d'un serveur apache. Le contenu du site que notre serveur va afficher est copié depuis le dossier ```content```.
 
-<span style="color:red">nooo</span>
+Le script crée une image de nom ```res/apache_php``` et son container (que l'on va run) est nommé ```res-labo4-step1```  Il occupe le port ```80``` .
 
-On tente de communiquer avec le serveur:
+A ce point, vous devriez avoir un exemple de site web avec du contenu statique, concluant la démo.
 
+Afin de montrer où sont situés les fichiers apache de configuration dans un container en cours d'exécution, on s'assure que la démo tourne toujours et on exécute les commandes suivantes **dans une autre fenêtre du terminal**:
+
+```bash
+docker exec -it res-labo4-step1 /bin/bash
 ```
-telnet 172.17.0.2 9090
+
+Le fichier de configuration du serveur ```apache2.conf``` est situé dans ```/etc/apache2```. On le vérifie au moyen de la commande:
+
+```bash
+cat /etc/apache2/apache2.conf
 ```
 
-Ici, j'ai une erreur...
 
-On exécute ensuite
-
-```
-docker exec -it NOM_I /bin/bash
-```
-On se trouve dans var/www/html, on peut faire un ls et constater qu'il n'y a rien du tout.
-
-On ouvre un navigateur et teste
 
 ## Step 2: Dynamic HTTP server with express.js
 
