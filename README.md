@@ -33,7 +33,7 @@ WORKDIR /var/www/html
 4. Maintenant il faut construire notre image avec le Dockerfile que l'on vient d'écrire
 
 ```bash
-docker build -t res/http-server .
+$ docker build -t res/http-server .
 
 ```
 
@@ -57,24 +57,21 @@ docker run -p 8008:80 -v $(pwd)/src/html:/var/www/html -d res/http-server
 
 - Avec ``docker run`` nous allons créer un container et le lancer
 
- - Avec ``-p 8008:80`` nous allons rediriger les communication effectuer via le port 8008 sur le port 80 de notre container
+- Avec ``-p 8008:80`` nous allons rediriger les communication effectuer via le port 8008 sur le port 80 de notre container
 
- - Avec ``-v ./src/html:/var/wwww/html`` nous allons jumeler le répertoire /var/www/html avec notre répertoire src/html dans lequel se trouve nos fichiers statiques
+- Avec ``-v ./src/html:/var/wwww/html`` nous allons jumeler le répertoire /var/www/html avec notre répertoire src/html dans lequel se trouve nos fichiers statiques
 
 - ``-d`` nous lancera le container en mode background
 
-  ---
+---
 
   
 
-6. En parallèle nous avons créer un dossier ``src/html`` dans lequel nous avons inserer un fichier ``index.html`` ainsi que des feuilles de style dédié trouvé depuis [](https://getbootstrap.com/docs/4.4/examples/cover/).
+6. En parallèle nous avons créer un dossier ``src/html`` dans lequel nous avons inserer un fichier ``index.html`` ainsi que des feuilles de style dédié trouvé depuis [Bootstrap](https://getbootstrap.com/docs/4.4/examples/cover/). Par défaut appache servira le fichier index.html automatiquement dès que nous voudront accéder à la page racine
 
 7. Une fois le container lancé nous pouvons accédé à la page via le navigateur
 
 <img src="./image/browser.png" style="zoom:67%;" />
-
-   
-
 
 
 ## Step 2: Dynamic HTTP server with express.js
