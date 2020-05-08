@@ -3,15 +3,16 @@
 ```
 Author : Sacha Perdrizat, Pablo Mercado
 ```
-
-## Step 1: Static HTTP server with apache httpd
-
 ## Step 2: Dynamic HTTP server with express.js
 
-## Step 3: Reverse proxy with apache (static configuration)
+Nous allons maintenant implémenter un petit serveur HTTP avec nodejs
 
-## Step 4: AJAX requests with JQuery
+1. Regardons pour cela si une image existe déjà sur le dockerhub, il s'avère que c'est le cas ![](https://hub.docker.com/_/node/)
 
-## Step 5: Dynamic reverse proxy configuration
+2. Créons à nouveau un dockerfile pour construire notre image, nous allons utiliser la dernière version stable de nodejs que nous pouvons atteindre via le TAG lts
 
-## Additional steps
+```dockerfile
+FROM node:lts
+```
+
+3. 
