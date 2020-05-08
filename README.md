@@ -52,16 +52,28 @@ docker run -p 8008:80 -v $(pwd)/src/html:/var/www/html -d res/http-server
 ```
 
 ###  Cette commande mérite des détails
- - Avec ``docker run`` nous allons créer un container et le lancer
+
+---
+
+- Avec ``docker run`` nous allons créer un container et le lancer
+
  - Avec ``-p 8008:80`` nous allons rediriger les communication effectuer via le port 8008 sur le port 80 de notre container
+
  - Avec ``-v ./src/html:/var/wwww/html`` nous allons jumeler le répertoire /var/www/html avec notre répertoire src/html dans lequel se trouve nos fichiers statiques
+
 - ``-d`` nous lancera le container en mode background
+
+  ---
+
+  
 
 6. En parallèle nous avons créer un dossier ``src/html`` dans lequel nous avons inserer un fichier ``index.html`` ainsi que des feuilles de style dédié trouvé depuis [](https://getbootstrap.com/docs/4.4/examples/cover/).
 
 7. Une fois le container lancé nous pouvons accédé à la page via le navigateur
 
+<img src="./image/browser.png" style="zoom:67%;" />
 
+   
 
 
 
