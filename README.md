@@ -70,8 +70,7 @@ docker run -p 8008:80 -v $(pwd)/src/html:/var/www/html -d res/http-server
 7. Par défaut appache servira le fichier index.html automatiquement dès que nous voudront accéder à la page racine , nous pouvons observer cela dans la configuration d'apache situé sur le container.
 
 ```bash
-$ docker exec res/http-server cat /etc/apache2/sites-available/000-default.conf
-docker exec -it <nom du container> cat /etc/apache2/sites-available/000-default.conf
+$ docker exec -it <nom du container> cat /etc/apache2/sites-available/000-default.conf
 ```
 
 Nous output la configuration d'apache par défaut
