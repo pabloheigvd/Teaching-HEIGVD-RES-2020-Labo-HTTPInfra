@@ -3,10 +3,6 @@ FROM php:7.2-apache
 
 COPY src/ /var/www/html/
 
-# docker run -d -p 9090:80 php:7.2-apache
-# -d pour tourner en background
-# -p port mapping
-
 # docker ps pour voir les images qui tournent
 # obetnir son ip: hostname -I
 # telnet telnet 172.17.0.1 9090
