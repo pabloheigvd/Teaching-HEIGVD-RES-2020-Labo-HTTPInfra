@@ -2,4 +2,6 @@ FROM node:lts
 
 WORKDIR /opt/app
 
-CMD ["node","./index.js"]
+COPY 
+
+CMD ["node","index.js"]
