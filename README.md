@@ -37,7 +37,7 @@ $ docker build -t res/http-server .
 
 ```
 
-L'image désormais créer on peut l'observer dans nos images local
+L'image est désormais construite on peut l'observer dans nos images locales
 
 ```
 $ docker images
@@ -45,13 +45,13 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 res/http-server     latest              6b414e955353        6 days ago          410MB
 ```
 
-5. Il maintenant temps de démarrer un container à partire de cette image
+5. Il maintenant temps de démarrer un container à partir de cette image
 
 ```bash
 docker run -p 8008:80 -v $(pwd)/src/html:/var/www/html -d res/http-server
 ```
 
-###  Cette commande mérite des détails
+####  Cette commande mérite des détails
 
 ---
 
@@ -59,21 +59,21 @@ docker run -p 8008:80 -v $(pwd)/src/html:/var/www/html -d res/http-server
 
 - Avec ``-p 8008:80`` nous allons rediriger les communication effectuer via le port 8008 sur le port 80 de notre container
 
-- Avec ``-v ./src/html:/var/wwww/html`` nous allons jumeler le répertoire /var/www/html avec notre répertoire src/html dans lequel se trouve nos fichiers statiques
+- Avec ``-v ./src/html:/var/wwww/html`` nous allons jumeler le répertoire ``/var/www/html`` avec notre répertoire ``src/html`` dans lequel se trouve nos fichiers statiques
 
 - ``-d`` nous lancera le container en mode background
 
 ---
 
-6. En parallèle nous avons créer un dossier ``src/html`` dans lequel nous avons inserer un fichier ``index.html`` ainsi que des feuilles de style dédié trouvé depuis [Bootstrap](https://getbootstrap.com/docs/4.4/examples/cover/). 
+6. En parallèle nous avons créé un dossier ``src/html`` dans lequel nous insérons un fichier ``index.html`` ainsi que des feuilles de style trouvés sur [Bootstrap](https://getbootstrap.com/docs/4.4/examples/cover/). 
 
-7. Par défaut appache servira le fichier index.html automatiquement dès que nous voudront accéder à la page racine , nous pouvons observer cela dans la configuration d'apache situé sur le container.
+7. Par défaut appache servira le fichier ``index.html`` automatiquement dès que nous voudront accéder à la page racine, nous pouvons observer cela dans la configuration d'apache situé sur le container.
 
 ```bash
 $ docker exec -it <nom du container> cat /etc/apache2/sites-available/000-default.conf
 ```
 
-Nous output la configuration d'apache par défaut
+Cette commande nous donne en sortie la configuration d'apache par défaut
 
 
 ```conf
@@ -115,14 +115,3 @@ la lignes la plus importante ici est ``DocumentRoot /var/www/html`` qui spécifi
 8. Une fois le container lancé nous pouvons accédé à la page via le navigateur
 
 <img src="./image/browser.png" style="zoom:60%;" />
-
-
-## Step 2: Dynamic HTTP server with express.js
-
-## Step 3: Reverse proxy with apache (static configuration)
-
-## Step 4: AJAX requests with JQuery
-
-## Step 5: Dynamic reverse proxy configuration
-
-## Additional steps
