@@ -9,8 +9,15 @@ var heads = 0;
 var tails = 0;
 
 app.get('/', function(req, res){ 
-    res.send(headOrTail() + ", head probability: " + headProbability());
+    res.send( 
+    { 
+        coinflip: headOrTail(),
+        head_probability: headProbability(),
+        total_coinflips: heads + tails
+    });
 });
+
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
 function headOrTail(){
     var HT = chance.bool();
@@ -23,4 +30,4 @@ function headOrTail(){
     }
 }
 
-function headProbability(){ return heads / (heads + tails)
+function headProbability(){ return heads / (heads + tails); }
