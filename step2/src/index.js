@@ -7,18 +7,8 @@ const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => {
-  res.send('Hello you send me a get request');
-});
-
-app.get('/test', (req, res) => {
-  res.send('Hello you send me a get at /test');
-});
-
-app.get('/persons', (req, res) => {
   res.send(genPerson());
 });
-
-
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
