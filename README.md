@@ -3,46 +3,50 @@
 ```
 Author : Sacha Perdrizat, Pablo Mercado
 ```
-## Step 2: Dynamic HTTP server with express.js
 
-Nous allons maintenant implémenter un petit serveur HTTP avec nodejs
+## Step 3 : Static reverse proxy
 
-1. Regardons pour cela si une image existe déjà sur le dockerhub, il s'avère que c'est le cas ![](https://hub.docker.com/_/node/)
 
-2. Créons à nouveau un dockerfile pour construire notre image, nous allons utiliser la dernière version stable de nodejs que nous pouvons atteindre via le TAG *lts*
+Maintenat que nous disposons de deux container nous servant respectivement des fichiers statiques et des données json dynamique, nous allons utiliser un reverse proxy pour rediriger les requête dans l'optique d'avoir un seul serveur centra qui va rediriger les requêtes vers les bon container en s'appuyant sur les entête de la requêtes HTTP qu'il va recevoir.
+
+
+### 1. Configuration du reverse proxy avec apache
+
+Apache pouvant faire office de reverse proxy nous allons préparer un nouveau container apache spécialement
+
 
 ```Dockerfile
-# on va se baser sur la dernière image stable de nodeJS
-FROM node:lts
 
-# ici on détermine le repertoire de travail courant 
-WORKDIR /opt/app
+# A Dockerfile for our reverse proxy
+FROM php:7.2-apache
 
-# cette commande sera lancé au démarrage de notre container
-# elle va lancer le sript nommé index.js dans le repertoire courant
-CMD ["node","./index.js"]
-```
+RUN apt-get update -y && apt-get install -y vim
 
-3. Maintenant créons notre petit programme NodeJs, nous allons commencer par initialiser un petit projet simple avec ``npm`` puis ensuite creer un petit serveur http à l'aide d'un framework javascript.
+COPY conf/ /etc/apache2
 
-```bash
+RUN a2enmod proxy proxy_http && service apache2 restart
 
-# on initialise le projet
-$ npm init
-
-# on install les package chance pour la génération de données aléatoire 
-$ npm install --save chance
-
-# on install expressJS pour l'implémentation simplifié d'un serveur HTTP
-$ npm install --save express
+RUN a2ensite 000-* 001-*
 
 ```
 
+Nous lui copions la configuration que voici
 
-```bash
-# on lance notre container en jumelant les répertoire src
-$ docker run -v $(pwd)/src:/opt/app res/http-dynamic-app
+```conf
+
+<VirtualHost *:80>
+
+  ServerName sacha.site.com
+  
+  # dynamic host
+  ProxyPass "/persons/" "http://172.17.0.2:3000/"
+  ProxyPassReverse "/persons/" "http://172.17.0.2:3000/"
+
+  # static host
+  ProxyPass "/" "http://172.17.0.4/"
+  ProxyPassReverse "/" "http://172.17.0.4/"
+
+</VirtualHost>
 
 ```
-
 
