@@ -10,7 +10,7 @@ Author : Sacha Perdrizat, Pablo Mercado
 Maintenant que nous disposons de deux container nous servant respectivement des fichiers statiques et des données JSON dynamique, nous allons utiliser un reverse proxy pour rediriger les requête dans l'optique d'avoir un seul serveur centra qui va rediriger les requêtes vers les bon container en s'appuyant sur les entête de la requêtes HTTP qu'il va recevoir.
 
 
-**Je préciser que pour cette partie j'ai un peu modifié les images docker, désormais les fichiers source seront copié dans le container lors de la création de l'image ce qui évitera de spécifier un répertoire à jumeler au lancement.**
+**Nous précisons que pour cette partie les précédentes images docker furent un peu modifiées, désormais les fichiers source seront copié dans le container lors de la création de l'image ce qui évitera de spécifier un répertoire à jumeler au lancement.**
 
 
 ### 1. Configuration du reverse proxy avec apache
@@ -32,7 +32,7 @@ RUN a2ensite 000-* 001-*
 
 Nous lui copions la configuration que voici.
 
-**Attention les addresses ip des container devront être adaptées**
+**Attention: Le fait d'utiliser des adresses statiques pour la redirection et bien entendu une mauvaise pratique car il faudra adapter la configuration à chaque changement**
 
 ```conf
 <VirtualHost *:80>
