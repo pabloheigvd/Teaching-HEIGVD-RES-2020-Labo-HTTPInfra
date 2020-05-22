@@ -1,3 +1,7 @@
 #!/bin/bash
-docker build -t res/http-server .
-docker run --name res-static -d res/http-server
+
+imageName='res/http-server'
+containerName='res-static'
+
+docker build -t $imageName .
+docker run --name $containerName -d $imageName

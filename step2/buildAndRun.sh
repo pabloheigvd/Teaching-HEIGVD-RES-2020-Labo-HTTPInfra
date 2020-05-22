@@ -1,5 +1,8 @@
 #!/bin/bash
 
-docker build -t res/http-dynamic-app .
+imageName='res/http-dynamic-app'
+containerName='res-dyn'
 
-docker run -d --name res-dyn res/http-dynamic-app
+docker build -t $imageName .
+
+docker run -d --name $containerName $imageName
