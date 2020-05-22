@@ -67,3 +67,11 @@ HOST: sacha.site.com
 # il nous suivra la réponse du serveur dynamique soit le fichier JSON avec les personnes
 
 ```
+
+## screenshot des tests effectuées
+
+### sur le contenu dynamique
+![](./images/GETdynamic.png)
+
+### sur le contenu statique
+![](./images/GETstatic.png)
