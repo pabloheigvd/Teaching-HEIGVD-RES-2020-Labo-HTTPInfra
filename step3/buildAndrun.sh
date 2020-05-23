@@ -11,4 +11,4 @@ then
   docker rm $(docker stop $(docker ps -aq --filter "name=${containerName}"))
 fi
 
-docker run -p 8080:80 --name $containerName $imageName
+docker run -d -p 8080:80 --name $containerName $imageName
