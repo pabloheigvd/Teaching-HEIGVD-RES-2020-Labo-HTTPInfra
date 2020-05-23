@@ -32,7 +32,7 @@ RUN a2ensite 000-* 001-*
 
 Nous lui copions la configuration que voici.
 
-**Attention: Le fait d'utiliser des adresses statiques pour la redirection et bien entendu une mauvaise pratique car il faudra adapter la configuration à chaque changement**
+**Attention: Le fait d'utiliser des adresses statiques pour la redirection et bien entendu une mauvaise pratique car il faudra adapter la configuration à chaque changement (redémarrage des containers)**
 
 ```conf
 <VirtualHost *:80>
