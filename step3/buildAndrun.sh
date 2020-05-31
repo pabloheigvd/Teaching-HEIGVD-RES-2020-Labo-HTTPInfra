@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# il est requis d'avoir lancé les container res-static et res-dyn
+
 imageName='res/apache-reverse-proxy'
 
 containerName='res-rp'
