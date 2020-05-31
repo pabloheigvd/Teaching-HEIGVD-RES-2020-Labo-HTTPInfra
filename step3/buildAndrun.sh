@@ -19,4 +19,7 @@ fi
 ip_Static=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $staticContainerName)
 ip_Dynamic=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $dynamicContainerName)
 
-docker run -e HTTP_STATIC=${ip_Static}:80 -e HTTP_DYNAMIQUE=${ip_Dynamic}:3000 -p 8080:80 --name $containerName $imageName
+docker run -d -e HTTP_STATIC=${ip_Static}:80 -e HTTP_DYNAMIQUE=${ip_Dynamic}:3000 -p 8080:80 --name $containerName $imageName
+
+sensible-browser "http://sacha.site.com:8080/" -d
+sensible-browser "http://sacha.site.com:8080/persons/" -d
