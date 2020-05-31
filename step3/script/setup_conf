@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "configuration for the server"
+echo "static server ip: ${HTTP_STATIC}"
+echo "dynamic server ip: ${HTTP_DYNAMIQUE}"
+
+php /etc/apache2/conf_template.php > /etc/apache2/sites-available/001-reverse-proxy.conf
+
+## launch appache2 foreground
+apache2-foreground

@@ -1,32 +1,20 @@
 #!/bin/bash
-imageNameS='res/http-server'
-containerNameS='res-static'
-imageNameD='res/http-dynamic-app'
-containerNameD='res-dyn'
+
 imageName='res/apache-reverse-proxy'
+
 containerName='res-rp'
+staticContainerName='res-static'
+dynamicContainerName='res-dyn'
 
 docker build  -t $imageName .
 
-if [ -n $(docker ps -aq --filter "name=${containerName}") ]
+if [ -n "$(docker ps -aq --filter "name=${containerName}")" ]
 then
   echo "suppression du container existant"
   docker rm $(docker stop $(docker ps -aq --filter "name=${containerName}"))
 fi
 
-#docker kill $containerNameS
-#docker kill $containerNameD
+ip_Static=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $staticContainerName)
+ip_Dynamic=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $dynamicContainerName)
 
-#docker run -d --name $containerNameS $imageNameS
-#docker run -d --name $containerNameD $imageNameD
-
-ipS=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $containerNameS)
-ipD=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $containerNameD)
-
-
-
-docker run -d -p 8080:80 --name $containerName $imageName -e STATIC_APP=$ipS -e DYNAMIC_APP=$ipD
-
-echo "# opening browser..."
-ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $containerName)
-sensible-browser $ip:$port
+docker run -e HTTP_STATIC=${ip_Static}:80 -e HTTP_DYNAMIQUE=${ip_Dynamic}:3000 -p 8080:80 --name $containerName $imageName
