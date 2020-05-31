@@ -37,15 +37,3 @@ Le fichier de configuration du serveur ```apache2.conf``` est situé dans ```/et
 cat /etc/apache2/apache2.conf
 ```
 
-
-
-## Step 2: Dynamic HTTP server with express.js
-
-## Step 3: Reverse proxy with apache (static configuration)
-
-## Step 4: AJAX requests with JQuery
-
-## Step 5: Dynamic reverse proxy configuration
-
-## Additional steps
-
